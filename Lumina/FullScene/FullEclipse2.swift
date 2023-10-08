@@ -136,7 +136,8 @@ class FullEclipse2: SKScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if nextButton.contains(touchLocation) {
+        if nextButton.contains(touchLocation) && nextButton.alpha != 0{
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if storyIdx == 0 {
                 self.run(SKAction.sequence([
                     SKAction.run {
@@ -165,6 +166,7 @@ class FullEclipse2: SKScene{
                     }
                     
                 ]))
+                storyIdx += 1
 
             } else if storyIdx == 1 {
                 self.run(SKAction.sequence([
@@ -194,6 +196,7 @@ class FullEclipse2: SKScene{
                     }
                     
                 ]))
+                storyIdx += 1
             } else if storyIdx == 2 {
                 self.run(SKAction.sequence([
                     SKAction.run {
@@ -218,6 +221,7 @@ class FullEclipse2: SKScene{
                     }
                     
                 ]))
+                storyIdx += 1
             } else if storyIdx == 3 {
                 self.run(SKAction.sequence([
                     SKAction.run {
@@ -250,14 +254,16 @@ class FullEclipse2: SKScene{
                     }
                     
                 ]))
+                
+                storyIdx += 1
             }
 
             
-            storyIdx += 1
         }
         
         if learnButton.contains(touchLocation)  {
-            if storyIdx == 5 {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
+            if storyIdx >= 4 && learnButton.alpha != 0{
                 self.view?.presentScene(FinalFull(size: self.size), transition: .crossFade(withDuration: 1))
             }
         }

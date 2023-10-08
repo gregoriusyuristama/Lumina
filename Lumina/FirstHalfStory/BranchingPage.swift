@@ -98,6 +98,7 @@ class BranchingPage: SKScene {
         let touchLocation = touch.location(in: self)
         
         if backgroundImg.contains(touchLocation) && hasSnapped{
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(nextScene[branchIdx], transition: .crossFade(withDuration: 2))
         }
     }

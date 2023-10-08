@@ -131,7 +131,8 @@ class PenumbralEclipse2: SKScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if nextButton.contains(touchLocation) {
+        if nextButton.contains(touchLocation) && nextButton.alpha != 0 {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if storyIdx == 0 {
                 self.run(SKAction.sequence([
                     SKAction.run {
@@ -154,6 +155,7 @@ class PenumbralEclipse2: SKScene{
                     }
                     
                 ]))
+                storyIdx += 1
 
             }else if storyIdx == 1 {
                 self.run(SKAction.sequence([
@@ -177,13 +179,14 @@ class PenumbralEclipse2: SKScene{
                     }
                     
                 ]))
+                storyIdx += 1
             }
             
-            storyIdx += 1
         }
         
-        if storyIdx == 3 {
-            if learnButton.contains(touchLocation) {
+        if storyIdx >= 2 {
+            if learnButton.contains(touchLocation) && learnButton.alpha != 0{
+                AudioManager.shared.playSoundEffect(fileName: "button_clicked")
                 self.view?.presentScene(FinalPenumbral(size: self.size), transition: .crossFade(withDuration: 1))
             }
         }

@@ -16,6 +16,7 @@ class HomePage: SKScene {
     
     
     override func didMove(to view: SKView) {
+        AudioManager.shared.playBackgroundMusic(fileName: "background_music")
         backgroundImg.scale(to: self.size)
         backgroundImg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         addChild(backgroundImg)
@@ -41,7 +42,7 @@ class HomePage: SKScene {
         let touchLocation = touch.location(in: self)
         
         if startButton.contains(touchLocation){
-            print("Check")
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(FirstHalfStory1(size: self.size),transition: SKTransition.crossFade(withDuration: 0.5))
         }
     }

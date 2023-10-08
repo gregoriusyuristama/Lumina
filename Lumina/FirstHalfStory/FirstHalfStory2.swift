@@ -81,7 +81,7 @@ class FirstHalfStory2: SKScene {
         let touchLocation = touch.location(in: self)
         
         if nextButton.contains(touchLocation){
-            print("Check")
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             
             if storyIdx == 0 {
                 self.run(SKAction.sequence([

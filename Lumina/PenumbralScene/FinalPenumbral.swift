@@ -49,21 +49,25 @@ class FinalPenumbral: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         if finalButton.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(BranchingPage(size: self.size), transition: .crossFade(withDuration: 1))
         }
         else if referenceButton3.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://en.wikipedia.org/wiki/Total_penumbral_lunar_eclipse") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         } else if referenceButton2.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://earthsky.org/astronomy-essentials/what-is-a-penumbral-eclipse-of-the-moon/#:~:text=Finally%2C%20there's%20a%20penumbral%20lunar,partial%20eclipse%20of%20the%20moon.") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         } else if referenceButton1.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://www.britannica.com/science/penumbra-eclipse") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)

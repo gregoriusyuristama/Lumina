@@ -47,21 +47,25 @@ class FinalFull: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         if finalButton.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(BranchingPage(size: self.size), transition: .crossFade(withDuration: 1))
         }
         else if referenceButton3.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://moon.nasa.gov/moon-in-motion/phases-eclipses-supermoons/eclipses/") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         } else if referenceButton2.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://moon.nasa.gov/moon-in-motion/phases-eclipses-supermoons/eclipses/") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
         } else if referenceButton1.contains(touchLocation) {
+            AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if let url = URL(string: "https://moon.nasa.gov/moon-in-motion/phases-eclipses-supermoons/eclipses/") {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)

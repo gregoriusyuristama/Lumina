@@ -45,7 +45,7 @@ class EclipseGameView: SKNode {
         moonOrbit.zPosition = 0
         addChild(moonOrbit)
         
-        moon = SKShapeNode(ellipseOf: CGSize(width: 18, height: 18))
+        moon = SKShapeNode(ellipseOf: CGSize(width: 25, height: 25))
         moon.zPosition = 1
         moon.fillColor = AppColor.moonColor!
         moon.strokeColor = .clear
@@ -129,7 +129,7 @@ class EclipseGameView: SKNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if sceneFrame.contains(touchLocation) {
+        if moon.contains(touchLocation) {
             isMovingLittleCircle = true
         }
     }
@@ -165,19 +165,11 @@ class EclipseGameView: SKNode {
             let distanceToClosestPoint = distanceBetween(point1: moon.position, point2: closestPoint.position)
             
             if distanceToClosestPoint <= positionTolerance {
-                print("Snap")
                 
-                // Set the flag to indicate that an action is in progress
                 isActionInProgress = true
-                
                 moon.run(SKAction.move(to: closestPoint.position, duration: 0.5)) {
                     [weak self] in
-                    // This code block is executed after the action completes
-                    
-                    // Reset the flag to indicate that the action has finished
                     self?.isActionInProgress = false
-                    
-                    // Notify about the snap index
                     self?.snapIdx = self?.targetCircles.firstIndex(of: closestPoint) ?? -1
                     self?.snapIdxSubject.send(self?.snapIdx ?? -1)
                 }
