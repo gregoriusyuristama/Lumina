@@ -7,12 +7,15 @@
 
 import Foundation
 import SpriteKit
+import Combine
 
 class EclipseGameView: SKNode {
     var moonOrbit: SKShapeNode!
     var moon: SKShapeNode!
     var earth: SKSpriteNode!
     private var isMovingLittleCircle = false
+    
+    var isActionInProgress = false
     
     var sceneFrame = CGRect()
 //    var targetCircle1: SKShapeNode!
@@ -23,7 +26,8 @@ class EclipseGameView: SKNode {
     
     var targetCircles: [SKShapeNode] = [SKShapeNode]()
     
-    private var snapIdx = -1
+    var snapIdx = -1
+    private var snapIdxSubject = PassthroughSubject<Int, Never>()
     
     override init() {
         super.init()
@@ -41,9 +45,10 @@ class EclipseGameView: SKNode {
         moonOrbit.zPosition = 0
         addChild(moonOrbit)
         
-        moon = SKShapeNode(circleOfRadius: 20)
+        moon = SKShapeNode(ellipseOf: CGSize(width: 18, height: 18))
         moon.zPosition = 1
-        moon.fillColor = .black
+        moon.fillColor = AppColor.moonColor!
+        moon.strokeColor = .clear
         moon.position = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2 + moonOrbit.frame.height/2)
         addChild(moon)
         
@@ -53,23 +58,63 @@ class EclipseGameView: SKNode {
 //        earth.fillColor = .green
         addChild(earth)
         
-        let targetCircle1 = SKShapeNode(circleOfRadius: 15)
-        targetCircle1.position = CGPoint(x: sceneFrame.width / 2 + moonOrbit.frame.width/2, y: sceneFrame.height / 2 )
-        targetCircle1.fillColor = .red
+        let targetCircle1 = SKShapeNode(ellipseOf: CGSize(width: 7, height: 7))
+        targetCircle1.position = CGPoint(x: sceneFrame.width / 2 + moonOrbit.frame.width/2 - targetCircle1.frame.width/4, y: sceneFrame.height / 2 )
+        targetCircle1.fillColor = AppColor.targetColor!
+        targetCircle1.strokeColor = .clear
         targetCircles.append(targetCircle1)
         
         let center = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2)
-        let angle = atan2(targetCircle1.position.y + 100 - center.y, targetCircle1.position.x - 20 - center.x)
+        let angle = atan2(targetCircle1.position.y + 53 + targetCircle1.frame.height/2 - center.y, targetCircle1.position.x - 5 - targetCircle1.frame.width/2 - center.x)
         
         // Calculate the position of the little circle on the circumference
         let radius = moonOrbit.frame.width/2 // Adjust this value to change the radius of movement
         let newX = center.x + CGFloat(radius) * cos(angle)
         let newY = center.y + CGFloat(radius) * sin(angle)
         
-        let targetCircle2 = SKShapeNode(circleOfRadius: 15)
-        targetCircle2.position = CGPoint(x: newX, y: newY)
-        targetCircle2.fillColor = .red
+        let targetCircle2 = SKShapeNode(ellipseOf: CGSize(width: 7, height: 7))
+        targetCircle2.position = CGPoint(x: newX - targetCircle2.frame.width/4, y: newY - targetCircle2.frame.height/4)
+        targetCircle2.fillColor = AppColor.targetColor!
+        targetCircle2.strokeColor = .clear
         targetCircles.append(targetCircle2)
+        
+        let center2 = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2)
+        let angle2 = atan2(targetCircle1.position.y - 53 - targetCircle1.frame.height/2 - center.y, targetCircle1.position.x + 5 - targetCircle1.frame.width/2 - center.x)
+        
+        
+        let newX2 = center.x + CGFloat(radius) * cos(angle2)
+        let newY2 = center.y + CGFloat(radius) * sin(angle2)
+        
+        let targetCircle3 = SKShapeNode(ellipseOf: CGSize(width: 7, height: 7))
+        targetCircle3.position = CGPoint(x: newX2 - targetCircle3.frame.width/4, y: newY2 - targetCircle3.frame.height/4)
+        targetCircle3.fillColor = AppColor.targetColor!
+        targetCircle3.strokeColor = .clear
+        targetCircles.append(targetCircle3)
+        
+        let center3 = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2)
+        let angle3 = atan2(targetCircle1.position.y - 15 - targetCircle1.frame.height/2 - center.y, targetCircle1.position.x + 5 - targetCircle1.frame.width/2 - center.x)
+        
+        let newX3 = center.x + CGFloat(radius) * cos(angle3)
+        let newY3 = center.y + CGFloat(radius) * sin(angle3)
+        
+        let targetCircle4 = SKShapeNode(ellipseOf: CGSize(width: 7, height: 7))
+        targetCircle4.position = CGPoint(x: newX3 - targetCircle4.frame.width/4, y: newY3 - targetCircle4.frame.height/4)
+        targetCircle4.fillColor = AppColor.targetColor!
+        targetCircle4.strokeColor = .clear
+        targetCircles.append(targetCircle4)
+        
+        let center4 = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2)
+        let angle4 = atan2(targetCircle1.position.y + 17 + targetCircle1.frame.height/2 - center.y, targetCircle1.position.x - 5 - targetCircle1.frame.width/2 - center.x)
+        
+        let newX4 = center.x + CGFloat(radius) * cos(angle4)
+        let newY4 = center.y + CGFloat(radius) * sin(angle4)
+        
+        let targetCircle5 = SKShapeNode(ellipseOf: CGSize(width: 7, height: 7))
+        targetCircle5.position = CGPoint(x: newX4 - targetCircle5.frame.width/4, y: newY4 - targetCircle5.frame.height/4)
+        targetCircle5.fillColor = AppColor.targetColor!
+        targetCircle5.strokeColor = .clear
+        targetCircles.append(targetCircle5)
+        
         
         for circle in targetCircles {
             addChild(circle)
@@ -84,7 +129,7 @@ class EclipseGameView: SKNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if moon.contains(touchLocation) {
+        if sceneFrame.contains(touchLocation) {
             isMovingLittleCircle = true
         }
     }
@@ -97,12 +142,10 @@ class EclipseGameView: SKNode {
         let center = CGPoint(x: sceneFrame.width / 2, y: sceneFrame.height / 2)
         let angle = atan2(touchLocation.y - center.y, touchLocation.x - center.x)
 
-        // Calculate the position of the little circle on the circumference
         let radius = moonOrbit.frame.width / 2
         let newX = center.x + CGFloat(radius) * cos(angle)
         let newY = center.y + CGFloat(radius) * sin(angle)
 
-        // Ensure the moon stays within the moonOrbit
         let deltaX = newX - center.x
         let deltaY = newY - center.y
         let distance = sqrt(deltaX * deltaX + deltaY * deltaY)
@@ -117,24 +160,31 @@ class EclipseGameView: SKNode {
     }
     
     func update(_ currentTime: TimeInterval) {
-        print("cek update")
-        if !isMovingLittleCircle {
+        if !isActionInProgress && !isMovingLittleCircle {
             let closestPoint = checkNearestPoint()
             let distanceToClosestPoint = distanceBetween(point1: moon.position, point2: closestPoint.position)
             
             if distanceToClosestPoint <= positionTolerance {
                 print("Snap")
                 
-                moon.run(SKAction.move(to: closestPoint.position, duration: 0.5))
-                snapIdx = targetCircles.firstIndex(of: closestPoint)!
+                // Set the flag to indicate that an action is in progress
+                isActionInProgress = true
                 
-                print(snapIdx)
-//                targetCircle!.run(SKAction.fadeOut(withDuration: 0.2))
-                
-//                shouldDoSnap = false
+                moon.run(SKAction.move(to: closestPoint.position, duration: 0.5)) {
+                    [weak self] in
+                    // This code block is executed after the action completes
+                    
+                    // Reset the flag to indicate that the action has finished
+                    self?.isActionInProgress = false
+                    
+                    // Notify about the snap index
+                    self?.snapIdx = self?.targetCircles.firstIndex(of: closestPoint) ?? -1
+                    self?.snapIdxSubject.send(self?.snapIdx ?? -1)
+                }
             }
         }
     }
+
     
     func checkNearestPoint() -> SKShapeNode {
         var closestPoint: SKShapeNode = targetCircles.first!
@@ -153,5 +203,9 @@ class EclipseGameView: SKNode {
     func distanceBetween(point1: CGPoint, point2: CGPoint) -> CGFloat {
         let deltaPos = point1 - point2
         return sqrt(deltaPos.x * deltaPos.x + deltaPos.y * deltaPos.y)
+    }
+    
+    var snapIdxPublisher: AnyPublisher<Int, Never> {
+        return snapIdxSubject.eraseToAnyPublisher()
     }
 }
