@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct HackathonNASAApp: App {
+struct LuminaApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

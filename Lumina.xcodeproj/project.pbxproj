@@ -11,6 +11,8 @@
 		B6DDAD002AD135150000AA6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDACFF2AD135150000AA6E /* ContentView.swift */; };
 		B6DDAD022AD135170000AA6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DDAD012AD135170000AA6E /* Assets.xcassets */; };
 		B6DDAD052AD135170000AA6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DDAD042AD135170000AA6E /* Preview Assets.xcassets */; };
+		B6DDAD0C2AD135950000AA6E /* EclipseGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDAD0B2AD135940000AA6E /* EclipseGameView.swift */; };
+		B6DDAD0F2AD148C20000AA6E /* CGPoint+math.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDAD0E2AD148C20000AA6E /* CGPoint+math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		B6DDACFF2AD135150000AA6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B6DDAD012AD135170000AA6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DDAD042AD135170000AA6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B6DDAD0B2AD135940000AA6E /* EclipseGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EclipseGameView.swift; sourceTree = "<group>"; };
+		B6DDAD0E2AD148C20000AA6E /* CGPoint+math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+math.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,10 @@
 		B6DDACFC2AD135150000AA6E /* HackathonNASA */ = {
 			isa = PBXGroup;
 			children = (
+				B6DDAD0D2AD148A60000AA6E /* Extension */,
 				B6DDACFD2AD135150000AA6E /* HackathonNASAApp.swift */,
 				B6DDACFF2AD135150000AA6E /* ContentView.swift */,
+				B6DDAD0B2AD135940000AA6E /* EclipseGameView.swift */,
 				B6DDAD012AD135170000AA6E /* Assets.xcassets */,
 				B6DDAD032AD135170000AA6E /* Preview Content */,
 			);
@@ -65,6 +71,14 @@
 				B6DDAD042AD135170000AA6E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B6DDAD0D2AD148A60000AA6E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B6DDAD0E2AD148C20000AA6E /* CGPoint+math.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +152,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DDAD002AD135150000AA6E /* ContentView.swift in Sources */,
+				B6DDAD0C2AD135950000AA6E /* EclipseGameView.swift in Sources */,
+				B6DDAD0F2AD148C20000AA6E /* CGPoint+math.swift in Sources */,
 				B6DDACFE2AD135150000AA6E /* HackathonNASAApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +213,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -275,21 +291,26 @@
 				DEVELOPMENT_TEAM = U43A7X58YW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumina;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gregoriusyuristama.HackathonNASA;
+				PRODUCT_BUNDLE_IDENTIFIER = gregoriusyuristama.lumina;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -304,21 +325,26 @@
 				DEVELOPMENT_TEAM = U43A7X58YW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumina;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gregoriusyuristama.HackathonNASA;
+				PRODUCT_BUNDLE_IDENTIFIER = gregoriusyuristama.lumina;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
