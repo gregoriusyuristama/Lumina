@@ -46,7 +46,7 @@ class FinalFull: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if finalButton.contains(touchLocation) {
+        if finalButton.contains(touchLocation) && finalButton.alpha == 1{
             AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(BranchingPage(size: self.size), transition: .crossFade(withDuration: 1))
         }

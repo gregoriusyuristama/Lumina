@@ -80,7 +80,7 @@ class FirstHalfStory2: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
-        if nextButton.contains(touchLocation){
+        if nextButton.contains(touchLocation) && nextButton.alpha == 1{
             AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             
             if storyIdx == 0 {

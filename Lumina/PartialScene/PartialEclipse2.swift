@@ -132,7 +132,7 @@ class PartialEclipse2: SKScene{
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
-        if nextButton.contains(touchLocation) && nextButton.alpha != 0{
+        if nextButton.contains(touchLocation) && nextButton.alpha == 1{
             AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if storyIdx == 0 {
                 self.run(SKAction.sequence([
@@ -192,7 +192,7 @@ class PartialEclipse2: SKScene{
             
         }
         
-        if storyIdx >= 3 {
+        if storyIdx >= 2 {
             if learnButton.contains(touchLocation) && learnButton.alpha != 0  {
                 AudioManager.shared.playSoundEffect(fileName: "button_clicked")
                 self.view?.presentScene(FinalPartial(size: self.size), transition: .crossFade(withDuration: 1))

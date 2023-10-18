@@ -131,7 +131,7 @@ class PenumbralEclipse2: SKScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if nextButton.contains(touchLocation) && nextButton.alpha != 0 {
+        if nextButton.contains(touchLocation) && nextButton.alpha == 1{
             AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             if storyIdx == 0 {
                 self.run(SKAction.sequence([

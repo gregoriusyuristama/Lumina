@@ -39,7 +39,7 @@ class FullEclipse1: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
-        if nextButton.contains(touchLocation) {
+        if nextButton.contains(touchLocation) && nextButton.alpha == 1{
             AudioManager.shared.playSoundEffect(fileName: "button_clicked")
             self.view?.presentScene(FullEclipse2(size: self.size), transition: .crossFade(withDuration: 1))
         }
